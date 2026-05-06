@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Test Gratuito – Simulación DELE A2 | DeleA2.org</title>
+
+  <meta name="description" content="Prueba una tarea real del DELE A2 gratis: escribe tu texto y recibe evaluación por IA según los criterios oficiales del Instituto Cervantes. Sin registro.">
+  <link rel="canonical" href="https://delea2.org/test-gratuito/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:title" content="Test Gratuito – Simulación DELE A2 | DeleA2.org">
+  <meta property="og:description" content="Prueba una tarea real del DELE A2 con evaluación por IA. Gratis y sin registro.">
+  <meta property="og:url" content="https://delea2.org/test-gratuito/">
+  <meta property="og:image" content="https://delea2.org/assets/images/og-default.jpg">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Test Gratuito – Simulación DELE A2">
+  <meta name="twitter:description" content="Prueba una tarea real del DELE A2 con evaluación por IA. Gratis y sin registro.">
+
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/newhome.css">
+
+  <style>
+    .ft-wrap {
+      max-width: 780px;
+      margin: 2.5rem auto 4rem;
+      padding: 0 1.25rem;
+    }
+
+    .ft-card {
+      background: #fff;
+      border-radius: 1.5rem;
+      padding: 2.5rem 2.5rem 2rem;
+      box-shadow: 0 6px 28px rgba(0,0,0,0.08);
+    }
+    @media (max-width: 600px) {
+      .ft-card { padding: 1.5rem 1.25rem 1.5rem; }
+    }
+
+    /* ---- Welcome ---- */
+    .ft-welcome { text-align: center; }
+    .ft-welcome h1 {
+      font-size: 1.9rem;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 0.6rem;
+    }
+    .ft-welcome .ft-sub {
+      font-size: 1.05rem;
+      color: #555;
+      margin-bottom: 1.75rem;
+      line-height: 1.6;
+    }
+    .ft-info-box {
+      background: #fff5f6;
+      border-radius: 1rem;
+      padding: 1.3rem 1.6rem;
+      margin-bottom: 2rem;
+      text-align: left;
+    }
+    .ft-info-box h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 0.8rem;
+    }
+    .ft-info-box ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .ft-info-box li {
+      font-size: 0.93rem;
+      color: #555;
+      padding: 0.4rem 0;
+      display: flex;
+      gap: 0.5rem;
+    }
+    .ft-info-box li::before {
+      content: "✓";
+      color: #c41e3a;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    /* ---- Buttons ---- */
+    .ft-btn {
+      padding: 0.8rem 1.6rem;
+      border-radius: 999px;
+      font-size: 0.97rem;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+    }
+    .ft-btn-primary {
+      background: #c41e3a;
+      color: #fff;
+    }
+    .ft-btn-primary:hover:not([disabled]) {
+      background: #aa151b;
+      transform: translateY(-1px);
+    }
+    .ft-btn-secondary {
+      background: #f9d6da;
+      color: #aa151b;
+    }
+    .ft-btn-secondary:hover:not([disabled]) {
+      background: #f5bdc4;
+    }
+    .ft-btn[disabled] {
+      opacity: 0.45;
+      cursor: not-allowed;
+      transform: none !important;
+    }
+
+    /* ---- Fade animation ---- */
+    @keyframes ftFadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ---- Writing task ---- */
+    .ft-tarea { display: none; }
+    .ft-tarea.active { display: block; animation: ftFadeIn 0.28s ease; }
+
+    .ft-section-badge {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.85rem;
+      border-radius: 999px;
+      margin-bottom: 1rem;
+      background: #fff3cd;
+      color: #856404;
+    }
+
+    .ft-task-prompt {
+      background: #fff5f6;
+      border-left: 3px solid #c41e3a;
+      border-radius: 0 12px 12px 0;
+      padding: 1.2rem 1.4rem;
+      margin-bottom: 1.5rem;
+    }
+    .ft-task-prompt h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #aa151b;
+      margin: 0 0 0.5rem;
+    }
+    .ft-task-prompt p {
+      font-size: 0.95rem;
+      color: #333;
+      line-height: 1.6;
+      margin: 0;
+    }
+    .ft-task-prompt ul {
+      margin: 0.5rem 0 0 1.25rem;
+      padding: 0;
+    }
+    .ft-task-prompt li {
+      font-size: 0.92rem;
+      color: #444;
+      line-height: 1.55;
+      margin-bottom: 0.25rem;
+    }
+
+    .ft-textarea {
+      width: 100%;
+      min-height: 260px;
+      padding: 1rem 1.2rem;
+      border: 2px solid #e5e2db;
+      border-radius: 0.85rem;
+      font-size: 1rem;
+      font-family: inherit;
+      color: #1a1a1a;
+      background: #fafafa;
+      resize: vertical;
+      line-height: 1.7;
+      box-sizing: border-box;
+      transition: border-color 0.18s;
+    }
+    .ft-textarea:focus {
+      outline: none;
+      border-color: #c41e3a;
+      background: #fff;
+    }
+    .ft-word-count {
+      font-size: 0.82rem;
+      color: #888;
+      text-align: right;
+      margin-top: 0.4rem;
+      margin-bottom: 1.25rem;
+    }
+    .ft-word-count.warning { color: #d97706; }
+    .ft-word-count.good { color: #c41e3a; }
+
+    .ft-nav {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    /* ---- Error ---- */
+    .ft-error {
+      display: none;
+      background: #fef2f2;
+      border-left: 3px solid #ef4444;
+      border-radius: 0 10px 10px 0;
+      padding: 1rem 1.2rem;
+      margin: 1rem 0;
+      font-size: 0.93rem;
+      color: #991b1b;
+      text-align: left;
+    }
+
+    /* ---- Loading ---- */
+    .ft-loading {
+      display: none;
+      text-align: center;
+      padding: 3rem 0;
+    }
+    .ft-loading.active { display: block; }
+    .ft-loading h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 0.5rem;
+    }
+    .ft-loading p {
+      color: #555;
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
+    }
+    .ft-spinner {
+      width: 48px;
+      height: 48px;
+      border: 4px solid #f9d6da;
+      border-top-color: #c41e3a;
+      border-radius: 50%;
+      margin: 0 auto 1rem;
+      animation: ftSpin 0.8s linear infinite;
+    }
+    @keyframes ftSpin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* ---- Results ---- */
+    .ft-results { display: none; }
+    .ft-results.active { display: block; text-align: center; animation: ftFadeIn 0.28s ease; }
+
+    .ft-results h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 0.5rem;
+    }
+    .ft-score-msg {
+      font-size: 1rem;
+      color: #555;
+      margin-bottom: 1.5rem;
+    }
+
+    .ft-score-ring {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      margin: 1.5rem auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: #fff;
+      background: linear-gradient(135deg, #c41e3a 0%, #e63946 100%);
+      box-shadow: 0 8px 28px rgba(196,30,58,0.28);
+      line-height: 1.3;
+      text-align: center;
+      white-space: pre-line;
+    }
+
+    /* ---- AI feedback ---- */
+    .ft-ai-feedback {
+      background: #fff;
+      border: 1.5px solid #e5e2db;
+      border-radius: 1rem;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      text-align: left;
+    }
+    .ft-ai-feedback h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin: 0 0 0.4rem;
+    }
+    .ft-ai-feedback .ft-ai-level {
+      display: inline-block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 0.25rem 0.8rem;
+      border-radius: 999px;
+      margin-bottom: 1rem;
+    }
+    /* Granular level pills (functional UX colors retained) */
+    .ft-ai-level.destacado    { background: #d4edda; color: #1b5e20; }
+    .ft-ai-level.apto         { background: #ecfdf5; color: #047857; }
+    .ft-ai-level.cerca        { background: #fff3cd; color: #856404; }
+    .ft-ai-level.no-apto      { background: #f8d7da; color: #721c24; }
+
+    .ft-criteria-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.6rem;
+      margin-bottom: 1rem;
+    }
+    @media (max-width: 500px) {
+      .ft-criteria-grid { grid-template-columns: 1fr; }
+    }
+    .ft-criterion {
+      background: #fafafa;
+      border-radius: 0.6rem;
+      padding: 0.6rem 0.8rem;
+    }
+    .ft-criterion-label {
+      font-size: 0.78rem;
+      color: #888;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .ft-criterion-score {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #1a1a1a;
+    }
+    .ft-ai-comment {
+      font-size: 0.93rem;
+      color: #444;
+      line-height: 1.65;
+      margin-top: 0.5rem;
+    }
+
+    /* ---- CTA box ---- */
+    .ft-cta-box {
+      background: linear-gradient(135deg, #c41e3a 0%, #aa151b 100%);
+      color: #fff;
+      border-radius: 1.3rem;
+      padding: 1.8rem 2rem;
+      margin-top: 1.75rem;
+      text-align: left;
+    }
+    .ft-cta-box h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.9rem;
+    }
+    .ft-cta-box ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 1.4rem;
+    }
+    .ft-cta-box li {
+      font-size: 0.95rem;
+      padding: 0.4rem 0;
+      display: flex;
+      gap: 0.5rem;
+    }
+    .ft-cta-box li::before {
+      content: "✓";
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .ft-btn-white {
+      display: inline-block;
+      background: #fff;
+      color: #c41e3a;
+      font-weight: 700;
+      padding: 0.85rem 1.75rem;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 0.97rem;
+      transition: background 0.2s;
+    }
+    .ft-btn-white:hover { background: #fff5f6; }
+
+    .ft-restart-btn { margin-top: 1.25rem; }
+  </style>
+</head>
+
+<body>
+
+<header class="cl-header">
+  <div class="cl-header-inner">
+    <a href="/" class="cl-logo">
+      <img src="/assets/images/es.svg" alt="ES" />
+      <span>DeleA2.org</span>
+    </a>
+    <nav class="cl-nav">
+      <a href="/sobre-el-examen/">Sobre el examen</a>
+      <a href="/test-gratuito/" class="active">Test gratuito</a>
+      <a href="/articulos/">Artículos</a>
+      <a href="/contacto/">Contacto</a>
+      <a href="https://civiclearn.com/dele/login">Acceder</a>
+    </nav>
+    <div class="cl-right">
+      <div class="cl-powered">powered by <span>CivicLearn</span></div>
+      <a href="https://civiclearn.com/dele/checkout" class="cl-btn">Acceso completo</a>
+    </div>
+  </div>
+</header>
+
+
+<div class="ft-wrap">
+  <div class="ft-card">
+
+    <!-- ==================== WELCOME ==================== -->
+    <div id="ft-welcome" class="ft-welcome">
+      <h1>Test Gratuito DELE A2</h1>
+      <p class="ft-sub">
+        Prueba una tarea real del examen DELE A2.<br>
+        Lee el enunciado, escribe tu texto y recibe evaluación por inteligencia artificial.
+      </p>
+
+      <div class="ft-info-box">
+        <h3>¿Cómo funciona?</h3>
+        <ul>
+          <li>Lees el enunciado de una tarea de Expresión Escrita</li>
+          <li>Redactas un correo de unas 80 palabras — como en la Tarea 2 del examen</li>
+          <li>Recibes evaluación inmediata por IA con los criterios oficiales del DELE A2</li>
+          <li>Sin registro — totalmente gratuito</li>
+          <li>Duración estimada: 10–20 minutos</li>
+        </ul>
+      </div>
+
+      <button class="ft-btn ft-btn-primary" onclick="startTarea()">Empezar la tarea →</button>
+    </div>
+
+
+    <!-- ==================== WRITING TASK ==================== -->
+    <div id="ft-tarea" class="ft-tarea">
+      <span class="ft-section-badge">Tarea 2 — Expresión e Interacción Escritas</span>
+
+      <div class="ft-task-prompt">
+        <h3>Enunciado</h3>
+        <p>
+          Vives desde hace poco tiempo en una nueva ciudad española y un amigo o
+          una amiga te ha pedido que le cuentes cómo te va. Escríbele un correo
+          electrónico de unas 80 palabras en el que:
+        </p>
+        <ul>
+          <li>le saludes;</li>
+          <li>le digas en qué ciudad vives ahora y cómo es;</li>
+          <li>le cuentes una cosa que te gusta y otra que no te gusta de la ciudad;</li>
+          <li>le invites a visitarte.</li>
+        </ul>
+        <p style="margin-top:0.6rem; font-size:0.85rem; color:#666;">
+          Firma como "Un amigo / Una amiga". Extensión recomendada: 70–90 palabras.
+        </p>
+      </div>
+
+      <textarea class="ft-textarea" id="ft-writing-area"
+        placeholder="Hola Marta,&#10;&#10;¿Cómo estás? Te escribo porque..."
+        oninput="updateWordCount()"></textarea>
+      <div class="ft-word-count" id="ft-word-count">0 palabras</div>
+
+      <div class="ft-error" id="ft-tarea-error"></div>
+
+      <div class="ft-nav">
+        <button class="ft-btn ft-btn-primary" id="ft-submit-writing" onclick="submitWriting()" disabled>Enviar para evaluación</button>
+      </div>
+    </div>
+
+
+    <!-- ==================== LOADING ==================== -->
+    <div id="ft-loading" class="ft-loading">
+      <div class="ft-spinner"></div>
+      <h2>Evaluando tu redacción...</h2>
+      <p>La inteligencia artificial está analizando tu texto con los criterios del DELE A2.<br>Esto puede tardar unos segundos.</p>
+    </div>
+
+
+    <!-- ==================== RESULTS ==================== -->
+    <div id="ft-results" class="ft-results">
+      <h2>Tu resultado</h2>
+
+      <div class="ft-score-ring" id="ft-score-ring">—</div>
+      <div class="ft-score-msg" id="ft-score-msg"></div>
+
+      <!-- AI feedback -->
+      <div class="ft-ai-feedback">
+        <h3>Evaluación detallada — Criterios DELE A2</h3>
+        <div class="ft-ai-level" id="ft-ai-level">—</div>
+
+        <div class="ft-criteria-grid" id="ft-criteria-grid"></div>
+
+        <div class="ft-ai-comment" id="ft-ai-comment">—</div>
+      </div>
+
+      <!-- CTA -->
+      <div class="ft-cta-box">
+        <h3>¿Quieres prepararte de verdad?</h3>
+        <ul>
+          <li>10 simulaciones completas con las 4 pruebas oficiales</li>
+          <li>Comprensión de Lectura y Auditiva con corrección instantánea</li>
+          <li>Expresión Escrita y Oral evaluadas por IA con feedback detallado</li>
+          <li>Calificación estimada (Apto / No apto) por grupo de pruebas</li>
+          <li>Estadísticas de progreso y acceso ilimitado</li>
+        </ul>
+        <a href="https://civiclearn.com/dele/checkout" class="ft-btn-white">Acceso completo — 69 €</a>
+      </div>
+
+      <div class="ft-restart-btn">
+        <button class="ft-btn ft-btn-secondary" onclick="restartTest()">Intentar de nuevo</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>© <span id="footer-year"></span> DeleA2.org — miembro de la red CivicLearn. Plataforma independiente de preparación. No estamos afiliados al Instituto Cervantes.</div>
+    <div class="footer-links">
+      <a href="/test-gratuito/">Test gratuito</a>
+      <a href="/articulos/">Artículos</a>
+      <a href="/contacto/">Contacto</a>
+      <a href="/politicas/">Políticas</a>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+var EVAL_URL = "https://htgliokekeaovdiafrgs.supabase.co/functions/v1/dele-free-eval";
+
+// ================================================================
+// NAVIGATION
+// ================================================================
+function hideAll() {
+  document.getElementById("ft-welcome").style.display = "none";
+  document.getElementById("ft-tarea").classList.remove("active");
+  document.getElementById("ft-loading").classList.remove("active");
+  document.getElementById("ft-results").classList.remove("active");
+}
+
+function startTarea() {
+  hideAll();
+  document.getElementById("ft-tarea").classList.add("active");
+}
+
+function restartTest() {
+  hideAll();
+  document.getElementById("ft-writing-area").value = "";
+  document.getElementById("ft-word-count").textContent = "0 palabras";
+  document.getElementById("ft-word-count").className = "ft-word-count";
+  document.getElementById("ft-tarea-error").style.display = "none";
+  document.getElementById("ft-submit-writing").disabled = true;
+  document.getElementById("ft-welcome").style.display = "block";
+}
+
+// ================================================================
+// WORD COUNT
+// ================================================================
+function updateWordCount() {
+  var text = document.getElementById("ft-writing-area").value.trim();
+  var words = text ? text.split(/\s+/).length : 0;
+  var el = document.getElementById("ft-word-count");
+  el.textContent = words === 1 ? "1 palabra" : words + " palabras";
+
+  el.className = "ft-word-count";
+  if (words >= 50 && words < 70) el.className = "ft-word-count warning";
+  if (words >= 70) el.className = "ft-word-count good";
+
+  document.getElementById("ft-submit-writing").disabled = words < 30;
+}
+
+// ================================================================
+// SUBMIT
+// ================================================================
+async function submitWriting() {
+  var text = document.getElementById("ft-writing-area").value.trim();
+  if (!text || text.split(/\s+/).length < 30) return;
+
+  document.getElementById("ft-tarea-error").style.display = "none";
+  hideAll();
+  document.getElementById("ft-loading").classList.add("active");
+
+  try {
+    var response = await fetch(EVAL_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        text: text,
+        task_prompt: "Correo a un amigo/a contándole cómo es la nueva ciudad española donde vives e invitándole a visitarte.",
+        genre: "correo electrónico personal"
+      })
+    });
+
+    if (!response.ok) {
+      var errBody = await response.json().catch(function() { return {}; });
+      if (response.status === 429) {
+        throw new Error(errBody.message || "Has alcanzado el límite de evaluaciones. Inténtalo de nuevo en unos minutos.");
+      }
+      throw new Error("Error en la evaluación. Inténtalo de nuevo.");
+    }
+
+    var result = await response.json();
+    showResults(result);
+
+  } catch (err) {
+    console.error("AI evaluation error:", err);
+    hideAll();
+    document.getElementById("ft-tarea").classList.add("active");
+    var errorEl = document.getElementById("ft-tarea-error");
+    errorEl.textContent = err.message || "Ha ocurrido un error en la evaluación. Inténtalo de nuevo.";
+    errorEl.style.display = "block";
+  }
+}
+
+// ================================================================
+// RESULTS
+// ================================================================
+function showResults(result) {
+  hideAll();
+
+  // Level in ring
+  var levelShort = {
+    "destacado": "Apto\n(destacado)",
+    "apto":      "Apto",
+    "cerca":     "Casi\nApto",
+    "no_apto":   "No\nApto"
+  };
+  var ring = document.getElementById("ft-score-ring");
+  ring.textContent = levelShort[result.level] || result.level;
+
+  // Message
+  var levelMessages = {
+    "destacado": "¡Excelente! Tu redacción demuestra un dominio sólido del nivel A2.",
+    "apto":      "¡Bien hecho! Estás en condiciones de presentarte al DELE A2.",
+    "cerca":     "Estás muy cerca. Con un poco más de práctica, llegarás al apto.",
+    "no_apto":   "Sigue practicando — las simulaciones repetidas marcan la diferencia."
+  };
+  document.getElementById("ft-score-msg").textContent =
+    levelMessages[result.level] || "Mira abajo la evaluación detallada.";
+
+  // Level badge
+  var levelLabels = {
+    "destacado": "Apto destacado",
+    "apto":      "Apto",
+    "cerca":     "Casi apto",
+    "no_apto":   "No apto"
+  };
+  var levelEl = document.getElementById("ft-ai-level");
+  levelEl.textContent = levelLabels[result.level] || result.level;
+  levelEl.className = "ft-ai-level " + (result.level || "").replace(/_/g, "-");
+
+  // Criteria grid (4 official DELE A2 Expresión Escrita criteria)
+  var grid = document.getElementById("ft-criteria-grid");
+  var criteriaLabels = {
+    "adecuacion_tarea":    "Adecuación a la tarea",
+    "coherencia_cohesion": "Coherencia y cohesión",
+    "correccion":          "Corrección gramatical",
+    "alcance":             "Alcance léxico"
+  };
+  var criteria = result.criteria || {};
+
+  grid.innerHTML = "";
+  for (var key in criteriaLabels) {
+    if (criteria[key] !== undefined) {
+      grid.innerHTML += '<div class="ft-criterion">'
+        + '<div class="ft-criterion-label">' + criteriaLabels[key] + '</div>'
+        + '<div class="ft-criterion-score">' + criteria[key] + '/5</div>'
+        + '</div>';
+    }
+  }
+
+  // Comment
+  document.getElementById("ft-ai-comment").textContent = result.comment || "";
+
+  document.getElementById("ft-results").classList.add("active");
+}
+
+// ================================================================
+document.getElementById("footer-year").textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>

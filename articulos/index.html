@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <title>Artículos – Preparación para el DELE A2 | DeleA2.org</title>
+
+  <meta name="description"
+        content="Artículos especializados sobre el DELE A2: preparación, calificación, convocatorias, nacionalidad española, comparativas y estrategias para cada prueba del examen.">
+
+  <link rel="canonical" href="https://delea2.org/articulos/" />
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:title" content="Artículos – Preparación para el DELE A2">
+  <meta property="og:description"
+        content="Artículos sobre el DELE A2: nacionalidad española, calificación, convocatorias, prueba oral, escrita y estrategias de preparación.">
+  <meta property="og:image"
+        content="https://delea2.org/assets/images/og-default.jpg">
+  <meta property="og:url" content="https://delea2.org/articulos/">
+  <meta property="og:site_name" content="DeleA2.org">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Artículos – Preparación para el DELE A2">
+  <meta name="twitter:description"
+        content="Artículos especializados para tu preparación del examen DELE A2.">
+
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/newhome.css">
+
+  <style>
+    .articles-hero {
+      text-align: center;
+      padding: 3.5rem 1.25rem 2.5rem;
+      background: linear-gradient(160deg, #fff5f6 0%, #fff 60%);
+    }
+    .articles-hero h1 {
+      font-size: 2.1rem;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 0.75rem;
+    }
+    .articles-hero-subtitle {
+      font-size: 1.05rem;
+      color: #555;
+      max-width: 620px;
+      margin: 0 auto 1.75rem;
+      line-height: 1.65;
+    }
+
+    /* Featured */
+    .featured-article {
+      max-width: 860px;
+      margin: 0 auto 2.5rem;
+      padding: 0 1.25rem;
+    }
+    .featured-article h2 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #c41e3a;
+      margin-bottom: 1.1rem;
+    }
+    .featured-card {
+      display: flex;
+      gap: 1.75rem;
+      background: #fff;
+      border-radius: 1.4rem;
+      overflow: hidden;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.08);
+      text-decoration: none;
+      color: inherit;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .featured-card:hover {
+      box-shadow: 0 10px 32px rgba(196,30,58,0.14);
+      transform: translateY(-2px);
+    }
+    .featured-card-image {
+      flex: 0 0 300px;
+      max-width: 300px;
+    }
+    .featured-card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .featured-card-content {
+      padding: 1.75rem 1.75rem 1.75rem 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .featured-card-content h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 0.75rem;
+      line-height: 1.4;
+    }
+    .featured-card-content p {
+      font-size: 0.97rem;
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+    }
+    .featured-read-more {
+      font-size: 0.93rem;
+      font-weight: 600;
+      color: #c41e3a;
+    }
+    @media (max-width: 640px) {
+      .featured-card { flex-direction: column; }
+      .featured-card-image { flex: none; max-width: 100%; height: 200px; }
+      .featured-card-content { padding: 1.25rem; }
+    }
+
+    /* Grid */
+    .articles-grid-section {
+      max-width: 1060px;
+      margin: 0 auto 3rem;
+      padding: 0 1.25rem;
+    }
+    .articles-grid-section h2 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 1.5rem;
+    }
+    .articles-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.4rem;
+    }
+    @media (max-width: 860px) {
+      .articles-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 540px) {
+      .articles-grid { grid-template-columns: 1fr; }
+    }
+    .blog-card {
+      background: #fff;
+      border-radius: 1.1rem;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .blog-card:hover {
+      box-shadow: 0 8px 24px rgba(196,30,58,0.13);
+      transform: translateY(-2px);
+    }
+    .blog-card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      display: block;
+    }
+    .blog-card-body {
+      padding: 1rem 1.1rem 1.25rem;
+      flex: 1;
+    }
+    .blog-card-body h3 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #1a1a1a;
+      line-height: 1.4;
+      margin-bottom: 0.45rem;
+    }
+    .blog-card-body p {
+      font-size: 0.87rem;
+      color: #666;
+      line-height: 1.5;
+    }
+
+    /* CTA bottom */
+    .articles-cta-bottom {
+      text-align: center;
+      padding: 3rem 1.25rem;
+      background: linear-gradient(135deg, #c41e3a 0%, #aa151b 100%);
+      color: #fff;
+    }
+    .articles-cta-bottom h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+    }
+    .articles-cta-bottom p {
+      font-size: 1rem;
+      opacity: 0.88;
+      margin-bottom: 1.5rem;
+    }
+    .cta-red {
+      display: inline-block;
+      background: #fff;
+      color: #c41e3a;
+      font-weight: 700;
+      padding: 0.85rem 2rem;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: background 0.2s;
+    }
+    .cta-red:hover { background: #fff5f6; }
+    .articles-hero .cta-red {
+      background: #c41e3a;
+      color: #fff;
+    }
+    .articles-hero .cta-red:hover { background: #aa151b; }
+  </style>
+</head>
+
+<body>
+
+<header class="cl-header">
+  <div class="cl-header-inner">
+    <a href="/" class="cl-logo">
+      <img src="/assets/images/es.svg" alt="ES" />
+      <span>DeleA2.org</span>
+    </a>
+    <nav class="cl-nav">
+      <a href="/sobre-el-examen/">Sobre el examen</a>
+      <a href="/test-gratuito/">Test gratuito</a>
+      <a href="/articulos/" class="active">Artículos</a>
+      <a href="/contacto/">Contacto</a>
+      <a href="https://civiclearn.com/dele/login">Acceder</a>
+    </nav>
+    <div class="cl-right">
+      <div class="cl-powered">powered by <span>CivicLearn</span></div>
+      <a href="https://civiclearn.com/dele/checkout" class="cl-btn">Acceso completo</a>
+    </div>
+  </div>
+</header>
+
+<section class="articles-hero">
+  <h1>Artículos sobre el DELE A2</h1>
+  <p class="articles-hero-subtitle">
+    Artículos especializados sobre el examen DELE A2: nacionalidad española,
+    estructura del examen, calificación, prueba oral, prueba escrita y
+    estrategias de preparación para cada uno de los cuatro grupos de pruebas.
+  </p>
+  <a href="https://civiclearn.com/dele/checkout" class="cta-red">Empieza tu preparación</a>
+</section>
+
+<section class="featured-article">
+  <h2>Artículo destacado</h2>
+  <a id="featured-card" class="featured-card" href="#">
+    <div class="featured-card-image">
+      <img id="featured-image" src="" alt="">
+    </div>
+    <div class="featured-card-content">
+      <h3 id="featured-title"></h3>
+      <p id="featured-desc"></p>
+      <span class="featured-read-more">Leer artículo →</span>
+    </div>
+  </a>
+</section>
+
+<section class="articles-grid-section">
+  <h2>Todos los artículos</h2>
+  <div class="articles-grid" id="articlesGrid"></div>
+</section>
+
+<section class="articles-cta-bottom">
+  <h3>¿Quieres aprobar el DELE A2 a la primera?</h3>
+  <p>Diez simulaciones completas con evaluación por IA y feedback siguiendo los criterios oficiales del examen.</p>
+  <a href="https://civiclearn.com/dele/checkout" class="cta-red">Acceso completo — 69 €</a>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>© <span id="footer-year"></span> DeleA2.org — miembro de la red CivicLearn. Plataforma independiente de preparación. No estamos afiliados al Instituto Cervantes.</div>
+    <div class="footer-links">
+      <a href="/test-gratuito/">Test gratuito</a>
+      <a href="/articulos/">Artículos</a>
+      <a href="/contacto/">Contacto</a>
+      <a href="/politicas/">Políticas</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(async function () {
+  let all;
+  try {
+    const res = await fetch('articles.json');
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    all = await res.json();
+  } catch (err) {
+    console.error('Could not load articles.json:', err);
+    return;
+  }
+
+  /* ───────────────────────────────────────────────
+     Featured: cornerstone (index 0) is permanent.
+     Rationale: DELE A2's SEO funnel is dominated by
+     a single high-volume query (nacionalidad), so
+     we pin the cornerstone instead of rotating.
+  ─────────────────────────────────────────────── */
+  const featured = all[0];
+
+  document.getElementById("featured-card").href         = featured.url;
+  document.getElementById("featured-image").src         = featured.image;
+  document.getElementById("featured-image").alt         = featured.title;
+  document.getElementById("featured-title").textContent = featured.title;
+  document.getElementById("featured-desc").textContent  = featured.desc;
+
+  /* ───────────────────────────────────────────────
+     Grid: shuffle remaining articles daily so the
+     page doesn't look static. Cornerstone stays
+     fixed at the top of the grid; everything else
+     rotates with a daily seed.
+  ─────────────────────────────────────────────── */
+  const grid = document.getElementById("articlesGrid");
+  if (!grid) return;
+
+  const dayIndex = Math.floor(Date.now() / (1000 * 60 * 60 * 24));
+  const rest     = all.slice(1);
+  const seeded   = rest
+    .map((a, i) => ({ a, k: ((i + 1) * 9301 + dayIndex * 49297) % 233280 }))
+    .sort((x, y) => x.k - y.k)
+    .map(o => o.a);
+
+  const ordered = [all[0], ...seeded];
+
+  grid.innerHTML = ordered.map(function(a) {
+    return '<a href="' + a.url + '" class="blog-card">'
+      + '<img src="' + a.image + '" alt="' + a.title.replace(/"/g, '&quot;') + '" loading="lazy">'
+      + '<div class="blog-card-body">'
+      + '<h3>' + a.title + '</h3>'
+      + '<p>' + a.desc + '</p>'
+      + '</div>'
+      + '</a>';
+  }).join('');
+})();
+
+document.getElementById("footer-year").textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
