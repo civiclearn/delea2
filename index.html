@@ -271,7 +271,7 @@
         </div>
       </div>
 
-      <!-- RIGHT ROW: REGISTRATION / NEXT PHASE -->
+      <!-- RIGHT ROW: NEXT REGISTRATION DEADLINE -->
       <div class="exam-status-row exam-status-row--registration">
         <div class="exam-status-counter" id="status-reg-counter">
           <span class="count-number">—</span>
@@ -280,8 +280,8 @@
 
         <div class="exam-status-text">
           <p class="exam-status-sentence" id="status-reg-text">
-            La inscripción cierra el
-            <strong>8 de abril de 2026</strong>.
+            La inscripción para la convocatoria de octubre cierra el
+            <strong>2 de septiembre de 2026</strong>.
           </p>
         </div>
       </div>
@@ -804,33 +804,41 @@ function convocatoriaLabel(ed) {
   return "convocatoria general";
 }
 
-/* -------- FIND CURRENT EDITION -------- */
+/* -------- FIND NEXT EXAM / NEXT DEADLINE -------- */
 
-function findCurrentEdition() {
+function findNextExam() {
   const now = new Date();
   now.setHours(0, 0, 0, 0);
-
-  for (let i = 0; i < DELE_SCHEDULE.length; i++) {
-    const ed = DELE_SCHEDULE[i];
+  for (const ed of DELE_SCHEDULE) {
     const examDate = new Date(ed.exam_date + "T00:00:00");
-    // The "current" edition is the next one whose exam hasn't passed yet,
-    // OR the most recent exam if results are still pending.
-    const resultsDate = new Date(ed.results_date + "T00:00:00");
-    if (resultsDate >= now) {
-      return { current: ed, next: DELE_SCHEDULE[i + 1] || null };
-    }
+    if (examDate >= now) return ed;
   }
-  return { current: null, next: null };
+  return null;
 }
 
-/* -------- MAIN LOGIC -------- */
+function findNextDeadline() {
+  const now = new Date();
+  now.setHours(0, 0, 0, 0);
+  for (const ed of DELE_SCHEDULE) {
+    const close = new Date(ed.registration_close + "T00:00:00");
+    if (close >= now) return ed;
+  }
+  return null;
+}
+
+/* -------- MAIN LOGIC --------
+   Two independent rotating counters:
+   - LEFT  card → next exam date (rolls forward the day after the exam)
+   - RIGHT card → next registration deadline (rolls forward the day after each deadline)
+   No phases, no special states. Each card has one job year-round.
+   ------------------------------------------------- */
 
 function updateDeleStatus() {
-  const { current, next } = findCurrentEdition();
+  const nextExam     = findNextExam();
+  const nextDeadline = findNextDeadline();
 
   const rows = document.querySelectorAll(".exam-status-row");
   if (rows.length < 2) return;
-
   const leftRow  = rows[0];
   const rightRow = rows[1];
 
@@ -844,139 +852,51 @@ function updateDeleStatus() {
 
   leftRow.classList.remove("is-urgent", "is-closed");
   rightRow.classList.remove("is-urgent", "is-closed");
-
-  /* --- NO UPCOMING EDITIONS --- */
-  if (!current) {
-    leftNum.textContent  = "—";
-    leftUnit.textContent = "";
-    leftText.innerHTML   = "No hay convocatorias del DELE A2 disponibles en este momento. Consulta la web del Instituto Cervantes para próximas fechas.";
-    rightRow.style.display = "none";
-    return;
-  }
-
   rightRow.style.display = "";
 
-  const now      = new Date();
-  now.setHours(0, 0, 0, 0);
-  const regOpen  = new Date(current.registration_open + "T00:00:00");
-  const regClose = new Date(current.registration_close + "T00:00:00");
-  const examDate = new Date(current.exam_date + "T00:00:00");
-  const results  = new Date(current.results_date + "T00:00:00");
-
-  const dExam    = daysUntil(current.exam_date);
-  const dReg     = daysUntil(current.registration_close);
-  const dResults = daysUntil(current.results_date);
-
-  /* =============================
-     PHASE 1 — BEFORE REGISTRATION OPENS
-     ============================= */
-  if (now < regOpen) {
-    var dOpen = daysUntil(current.registration_open);
-
+  /* ---- LEFT CARD: NEXT EXAM ---- */
+  if (nextExam) {
+    const dExam = daysUntil(nextExam.exam_date);
     leftNum.textContent  = dExam;
     leftUnit.textContent = dayLabel(dExam);
-    leftText.innerHTML =
-      'La próxima ' + convocatoriaLabel(current) + ' del DELE A2 se celebra el ' +
-      '<strong>' + formatDateES(current.exam_date) + '</strong>.';
-
-    rightNum.textContent  = dOpen;
-    rightUnit.textContent = dayLabel(dOpen);
-    rightText.innerHTML =
-      'La inscripción abre el ' +
-      '<strong>' + formatDateES(current.registration_open) + '</strong>.';
-
-    return;
-  }
-
-  /* =============================
-     PHASE 2 — REGISTRATION OPEN
-     ============================= */
-  if (now >= regOpen && now <= regClose) {
-
-    leftNum.textContent  = dExam;
-    leftUnit.textContent = dayLabel(dExam);
-    leftText.innerHTML =
-      'La próxima ' + convocatoriaLabel(current) + ' del DELE A2 se celebra el ' +
-      '<strong>' + formatDateES(current.exam_date) + '</strong>.' +
-      ' <span class="status-pill is-open" style="background:#fff3cd;color:#856404;">Inscripción abierta</span>';
-
-    rightNum.textContent  = dReg;
-    rightUnit.textContent = dayLabel(dReg);
-    rightText.innerHTML =
-      'La inscripción cierra el ' +
-      '<strong>' + formatDateES(current.registration_close) + '</strong>. ¡Inscríbete en un centro de examen DELE!';
-
-    rightRow.classList.add("is-urgent");
-    return;
-  }
-
-  /* =============================
-     PHASE 3 — REGISTRATION CLOSED, BEFORE EXAM
-     ============================= */
-  if (now > regClose && now < examDate) {
-
-    leftNum.textContent  = dExam;
-    leftUnit.textContent = dayLabel(dExam);
-    leftText.innerHTML =
-      'La próxima ' + convocatoriaLabel(current) + ' del DELE A2 se celebra el ' +
-      '<strong>' + formatDateES(current.exam_date) + '</strong>.' +
-      ' <span class="status-pill">Inscripción cerrada</span>';
-
-    rightNum.textContent  = dExam;
-    rightUnit.textContent = dayLabel(dExam);
-    rightText.innerHTML =
-      '¡Hora de prepararse! Usa nuestras simulaciones para llegar listo el día del examen.';
-
-    return;
-  }
-
-  /* =============================
-     PHASE 4 — EXAM DAY
-     ============================= */
-  if (now.getTime() === examDate.getTime()) {
-
-    leftNum.textContent  = "📝";
+    if (dExam === 0) {
+      leftText.innerHTML =
+        '<strong>¡El examen DELE A2 se celebra hoy!</strong> Mucha suerte a todos los candidatos.';
+    } else {
+      leftText.innerHTML =
+        'La próxima ' + convocatoriaLabel(nextExam) + ' del DELE A2 se celebra el ' +
+        '<strong>' + formatDateES(nextExam.exam_date) + '</strong>.';
+      if (dExam <= 14) leftRow.classList.add("is-urgent");
+    }
+  } else {
+    leftNum.textContent  = "—";
     leftUnit.textContent = "";
     leftText.innerHTML =
-      '<strong>¡El examen DELE A2 se está celebrando hoy!</strong>' +
-      ' Mucha suerte a todos los candidatos.';
-
-    rightNum.textContent  = dResults;
-    rightUnit.textContent = dayLabel(dResults);
-    rightText.innerHTML =
-      'Los resultados se publicarán hacia el ' +
-      '<strong>' + formatDateES(current.results_date) + '</strong>.';
-
-    return;
+      'Aún no se han anunciado nuevas convocatorias. Consulta la web del Instituto Cervantes.';
   }
 
-  /* =============================
-     PHASE 5 — AFTER EXAM, AWAITING RESULTS
-     ============================= */
-  if (now > examDate && now <= results) {
-
-    leftNum.textContent  = dResults;
-    leftUnit.textContent = dayLabel(dResults);
-    leftText.innerHTML =
-      'El examen DELE A2 (' + current.convocatoria + ') ya se ha celebrado.' +
-      ' Los resultados se publicarán hacia el ' +
-      '<strong>' + formatDateES(current.results_date) + '</strong>.';
-
-    if (next) {
-      var dNext = daysUntil(next.exam_date);
-      rightNum.textContent  = dNext;
-      rightUnit.textContent = dayLabel(dNext);
+  /* ---- RIGHT CARD: NEXT REGISTRATION DEADLINE ---- */
+  if (nextDeadline) {
+    const dClose = daysUntil(nextDeadline.registration_close);
+    const month  = nextDeadline.convocatoria.split(' ')[0];   // "octubre 2026" → "octubre"
+    rightNum.textContent  = dClose;
+    rightUnit.textContent = dayLabel(dClose);
+    if (dClose === 0) {
       rightText.innerHTML =
-        'Próxima ' + convocatoriaLabel(next) + ': ' +
-        '<strong>' + formatDateES(next.exam_date) + '</strong>.';
+        '<strong>¡Hoy es el último día de inscripción para la convocatoria de ' +
+        month + '!</strong>';
+      rightRow.classList.add("is-urgent");
     } else {
-      rightNum.textContent  = "—";
-      rightUnit.textContent = "";
       rightText.innerHTML =
-        'Aún no se ha anunciado la próxima convocatoria. ¡Empieza a prepararte desde ahora!';
+        'La inscripción para la convocatoria de ' + month + ' cierra el ' +
+        '<strong>' + formatDateES(nextDeadline.registration_close) + '</strong>.';
+      if (dClose <= 14) rightRow.classList.add("is-urgent");
     }
-
-    return;
+  } else {
+    rightNum.textContent  = "—";
+    rightUnit.textContent = "";
+    rightText.innerHTML =
+      'Aún no se han anunciado nuevas fechas de inscripción.';
   }
 }
 
