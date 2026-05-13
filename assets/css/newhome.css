@@ -1223,9 +1223,9 @@ section {
    ------------------------------------------------------ */
 
 .status-pill {
-  position: absolute;
+  display: inline-block;
   margin-left: 8px;
-  transform: translateY(2px);
+  transform: translateY(-1px);
 
   padding: 2px 8px;
   font-size: 11px;
@@ -1235,6 +1235,7 @@ section {
   background: rgba(0,0,0,0.08);
   color: rgba(0,0,0,0.65);
   white-space: nowrap;
+  vertical-align: baseline;
 }
 
 .status-pill.is-hidden {
