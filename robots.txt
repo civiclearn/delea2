@@ -1,0 +1,7 @@
+# robots.txt for delea2.org
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://delea2.org/sitemap.xml
